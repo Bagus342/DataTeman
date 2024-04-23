@@ -48,9 +48,10 @@ class MyListData : AppCompatActivity() {
             .addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
+                        dataTeman.clear()
                         for (dataSnapshot in snapshot.children) {
                             val teman = dataSnapshot.getValue(data_teman::class.java)
-                            teman?.key = snapshot.key
+                            teman?.key = dataSnapshot.key
                             dataTeman.add(teman!!)
                         }
                         adapter = RecyclerViewAdapter(dataTeman, this@MyListData)
@@ -74,7 +75,7 @@ class MyListData : AppCompatActivity() {
         recyclerView?.setHasFixedSize(true)
 
         val itemDecoration = DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL)
-        itemDecoration.setDrawable(ContextCompat.getDrawable(applicationContext, com.google.android.material.R.drawable.m3_tabs_line_indicator)!!)
+        itemDecoration.setDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.line)!!)
         recyclerView?.addItemDecoration(itemDecoration)
     }
 }
